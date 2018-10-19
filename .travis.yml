@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run mihalytari/react-image npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "react-image"
+  env: "ReactImage-env"
+  bucket_name: "elasticbeanstalk-us-east-2-151932697359"
+  bucket_path: "react-image"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
